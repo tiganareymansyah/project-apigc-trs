@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .div-data {
+        display: flex;
+        justify-content: center;
+
+        & table {
+          border: 1px solid;
+          border-collapse: collapse;
+
+          & th,
+          td {
+            border: 1px solid;
+            padding: 16px;
+            text-align: center;
+
+            > img {
+              width: 50px;
+            }
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div-data">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Types Chord</th>
+            <th>Images Chord</th>
+          </tr>
+        </thead>
+        <tbody class="tbody-data"></tbody>
+      </table>
+    </div>
+    <script>
+      fetch("/api/guitarchordstrs", {
+        method: "GET",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const tbodyData = document.querySelector(".tbody-data");
+          for (let a = 0; a < data.length; a++) {
+            for (let z = 0; z < data[a].typechords.length; z++) {
+              const tr = document.createElement("tr");
+
+              const tdNo = document.createElement("td");
+              tdNo.textContent = `${z + 1}.`;
+              tr.appendChild(tdNo);
+
+              const tdChordName = document.createElement("td");
+              tdChordName.textContent = data[a].typechords[z].chordname;
+              tr.appendChild(tdChordName);
+
+              const tdChordImage = document.createElement("td");
+              const imgChord = document.createElement("img");
+              imgChord.src = data[a].typechords[z].chordimage;
+              tdChordImage.appendChild(imgChord);
+              tr.appendChild(tdChordImage);
+
+              tbodyData.appendChild(tr);
+            }
+          }
+        });
+    </script>
+  </body>
+</html>
