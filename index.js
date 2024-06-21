@@ -10,7 +10,7 @@ app.use(express.static("public"));
 
 app.get("/api/guitarchordstrs", (_req, res) => {
   res.send({
-    code: "200",
+    code: 200,
     status: "success",
     message: "Data Found",
     data: dataGuitarChords
