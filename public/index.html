@@ -50,10 +50,10 @@
         method: "GET",
       })
         .then((response) => response.json())
-        .then((data) => {
+        .then((result) => {
           const tbodyData = document.querySelector(".tbody-data");
-          for (let a = 0; a < data.length; a++) {
-            for (let z = 0; z < data[a].typechords.length; z++) {
+          for (let a = 0; a < result.data.length; a++) {
+            for (let z = 0; z < result.data[a].typechords.length; z++) {
               const tr = document.createElement("tr");
 
               const tdNo = document.createElement("td");
@@ -61,12 +61,12 @@
               tr.appendChild(tdNo);
 
               const tdChordName = document.createElement("td");
-              tdChordName.textContent = data[a].typechords[z].chordname;
+              tdChordName.textContent = result.data[a].typechords[z].chordname;
               tr.appendChild(tdChordName);
 
               const tdChordImage = document.createElement("td");
               const imgChord = document.createElement("img");
-              imgChord.src = data[a].typechords[z].chordimage;
+              imgChord.src = result.data[a].typechords[z].chordimage;
               tdChordImage.appendChild(imgChord);
               tr.appendChild(tdChordImage);
 
